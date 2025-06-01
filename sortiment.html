@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sortiment</title>
+
+  <!-- Firebase knihovny -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      background: url('img/back1.jpg') center/cover no-repeat;
+      height: 100vh;
+      font-family: sans-serif;
+      position: relative;
+      overflow: auto;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+
+    .bubble-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 50px;
+      padding-top: 330px;
+      z-index: 1;
+      position: relative;
+      text-align: center;
+    }
+
+    .bubble {
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px); /* pro Safari */
+      font-family: 'Poppins', sans-serif;
+      border-radius: 60px;
+      width: 230px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 25px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      color: white;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .bubble:hover {
+      transform: scale(1.1);
+    }
+
+    .content-box {
+      display: none;
+      background-color: white;
+      padding: 20px;
+      margin: 30px auto;
+      width: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      z-index: 2;
+      position: relative;
+      font-size: 25px;
+      font-weight: normal;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    textarea, input, button {
+      width: 100%;
+      font-size: 16px;
+      padding: 10px;
+      margin-top: 10px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: grey;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: lightgrey;
+      color: black;
+    }
+
+    @media (max-width: 600px) {
+        .bubble-container {
+            flex-direction: column;
+            text-align: center;
+            gap: 20px;
+            padding-top: 60px;
+        }
+
+        .bubble {
+            width: 180px;
+            height: 120px;
+            font-size: 20px;
+        }
+
+        .content-box {
+            width: 90%;
+            padding: 15px;
+            font-weight: normal;
+        }
+
+        .item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+        }
+
+        textarea, input, button {
+            font-size: 14px;
+            padding: 8px;
+        }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="bubble-container">
+    <div class="bubble" onclick="showContent('nabidka')">Nabídka</div>
+    <div class="bubble" onclick="showContent('pozadavky')">Požadavky</div>
+    <div class="bubble" onclick="showContent('aktuality')">Aktuality</div>
+  </div>
+
+  <div id="nabidka" class="content-box">
+    <h2>Položky v obchodě</h2>
+    <div id="items"></div>
+  </div>
+
+  <div id="pozadavky" class="content-box">
+    <h2>Napište zprávu</h2>
+    <input type="text" id="msgInput" placeholder="Zpráva...">
+    <button onclick="sendMessage()">Odeslat</button>
+  </div>
+
+  <div id="aktuality" class="content-box">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fermentum lacus a lectus iaculis, eu pellentesque nunc aliquam. Nulla aliquam eget ipsum id vulputate. Ut scelerisque magna eu tortor hendrerit, et aliquam elit convallis. Maecenas gravida odio nec dolor congue, in ultricies magna elementum. Duis urna augue, consequat id sapien sit amet, mattis mattis est. Aliquam erat volutpat. Aliquam erat nisl, consectetur ut varius ac, rutrum id arcu. Pellentesque eget tristique purus, a facilisis urna. Proin et sapien consequat, vulputate metus id, venenatis turpis. Aenean pretium dolor et rhoncus placerat. Ut ut eleifend nunc. Curabitur ultrices ante libero, id pretium ex ornare ut.
+    </p>
+    <p>    
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fermentum lacus a lectus iaculis, eu pellentesque nunc aliquam. Nulla aliquam eget ipsum id vulputate. Ut scelerisque magna eu tortor hendrerit, et aliquam elit convallis. Maecenas gravida odio nec dolor congue, in ultricies magna elementum. Duis urna augue, consequat id sapien sit amet, mattis mattis est. Aliquam erat volutpat. Aliquam erat nisl, consectetur ut varius ac, rutrum id arcu. Pellentesque eget tristique purus, a facilisis urna. Proin et sapien consequat, vulputate metus id, venenatis turpis. Aenean pretium dolor et rhoncus placerat. Ut ut eleifend nunc. Curabitur ultrices ante libero, id pretium ex ornare ut.
+    </p>
+  </div>
+
+  <script>
+    function showContent(id) {
+      document.querySelectorAll('.content-box').forEach(el => el.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+
+    // Firebase konfigurace
+    const firebaseConfig = {
+      apiKey: "AIzaSyABTLnTKRr2FdzYKBpwf8KpKdYBhzJY1oQ",
+      authDomain: "smazka-10a6b.firebaseapp.com",
+      databaseURL: "https://smazka-10a6b-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "smazka-10a6b",
+      storageBucket: "smazka-10a6b.appspot.com",
+      messagingSenderId: "197596570406",
+      appId: "1:197596570406:web:d3a23dffc5b2fe78a797e7"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    function loadItems() {
+      db.ref("items").on("value", snapshot => {
+        const itemsDiv = document.getElementById("items");
+        itemsDiv.innerHTML = "";
+
+        snapshot.forEach(child => {
+          const item = child.val();
+          const name = item.name || "Neznámá položka";
+          const cena = item.cena !== undefined ? item.cena + " Kč" : "";
+
+          itemsDiv.innerHTML += `
+            <div class="item">
+              <span>${name}</span>
+              <span><strong>${cena}</strong></span>
+            </div>
+          `;
+        });
+      });
+    }
+
+    function sendMessage() {
+        const input = document.getElementById("msgInput");
+        const msg = input.value.trim();
+
+        if (!msg) {
+            alert("Zpráva nesmí být prázdná.");
+            return;
+        }
+
+        // Pokus o zápis do Firebase
+        db.ref("messages").push({ text: msg, solved: false })
+            .then(() => {
+            alert("Zpráva byla úspěšně odeslána.");
+            input.value = "";
+        })
+        .catch(error => {
+            console.error("Chyba při odesílání zprávy:", error);
+            alert("Zpráva nebyla odeslána. Zkontrolujte připojení k databázi.");
+        });
+    }
+
+    // Načtení při startu
+    loadItems();
+  </script>
+
+</body>
+</html>

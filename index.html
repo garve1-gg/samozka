@@ -1,0 +1,84 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Úvod</title>
+  <style>
+    body {
+      margin: 0;
+      background: url('img/back1.jpg') center/cover no-repeat;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.4); /* ztmavení */
+      z-index: 0;
+    }
+
+    .bubble-container {
+      display: flex;
+      gap: 150px;
+      z-index: 1;
+    }
+
+    .bubble {
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px); /* pro Safari */
+      border-radius: 60px;
+      padding: 15px 30px;
+      font-family: 'Poppins', sans-serif;
+      width: 230px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      transition: all 0.3s ease;
+    }
+
+    .bubble:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
+    }
+
+
+    @media (max-width: 600px) {
+      .bubble-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .bubble {
+        width: 180px;
+        height: 120px;
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bubble-container">
+    <a class="bubble" href="aboutus.html">O nás</a>
+    <a class="bubble" href="sortiment.html">Sortiment</a>
+  </div>
+
+</body>
+</html>
