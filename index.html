@@ -8,7 +8,7 @@
   <style>
     body {
       margin: 0;
-      background: url('back1.jpg') center/cover no-repeat;
+      background: url('img/back1.jpg') center/cover no-repeat;
       height: 100vh;
       display: flex;
       justify-content: center;
@@ -21,7 +21,7 @@
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5); /* ztmavení */
+      background: rgba(0, 0, 0, 0.4); /* ztmavení */
       z-index: 0;
     }
 
@@ -32,26 +32,32 @@
     }
 
     .bubble {
-      border: 3px solid white;
-      background-color: #EED3A7;
-      border-radius: 70%;
+      background: rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px); /* pro Safari */
+      border-radius: 70px;
+     padding: 15px 30px;
+      font-family: 'Poppins', sans-serif;
       width: 230px;
       height: 150px;
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 30px;
-      font-weight: bold;
+      font-weight: 700;
       text-align: center;
       text-decoration: none;
-      color: black;
-      box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      transition: transform 0.3s;
+      color: white;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+      transition: all 0.3s ease;
     }
 
     .bubble:hover {
-      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.05);
     }
+
 
     @media (max-width: 600px) {
       .bubble-container {
@@ -68,9 +74,11 @@
   </style>
 </head>
 <body>
+
   <div class="bubble-container">
     <a class="bubble" href="aboutus.html">O nás</a>
     <a class="bubble" href="sortiment.html">Sortiment</a>
   </div>
+
 </body>
 </html>
