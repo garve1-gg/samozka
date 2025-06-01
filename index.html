@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Obchod</title>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2em;
+      background-color: #f7f7f7;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: #fff;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-top: 1.5em;
+        color: #333;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #ddd;
+      background-color: #fafafa;
+      padding: 1em;
+      margin-bottom: 1em;
+      border-radius: 5px;
+    }
+
+    input, button {
+      padding: 0.5em;
+      margin-top: 0.5em;
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1976D2;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #000;
+    }
+  </style>
+
+</head>
+<body>
+<div class="container">
+  <h2>Položky v obchodě</h2>
+  <div id="items"></div>
+
+  <h2>Napište zprávu</h2>
+  <input type="text" id="msgInput" placeholder="Zpráva...">
+  <button onclick="sendMessage()">Odeslat</button>
+</div>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyABTLnTKRr2FdzYKBpwf8KpKdYBhzJY1oQ",
+    authDomain: "smazka-10a6b.firebaseapp.com",
+    databaseURL: "https://smazka-10a6b-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "smazka-10a6b",
+    storageBucket: "smazka-10a6b.appspot.com",
+    messagingSenderId: "197596570406",
+    appId: "1:197596570406:web:d3a23dffc5b2fe78a797e7"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  function loadItems() {
+    db.ref("items").on("value", snapshot => {
+      const itemsDiv = document.getElementById("items");
+      itemsDiv.innerHTML = "";
+
+      snapshot.forEach(child => {
+        const item = child.val();
+        const name = item.name || "Neznámá položka";
+        const cena = item.cena !== undefined ? item.cena + " Kč" : "";
+
+        itemsDiv.innerHTML += `
+          <div class="item">
+            <span>${name}</span>
+            <span class="price">${cena}</span>
+          </div>
+        `;
+      });
+    });
+  }
+
+  function sendMessage() {
+    const msg = document.getElementById("msgInput").value.trim();
+    if (msg) {
+      db.ref("messages").push({ text: msg, solved: false });
+      document.getElementById("msgInput").value = "";
+    }
+  }
+
+  loadItems();
+</script>
+</body>
+</html>
