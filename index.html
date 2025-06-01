@@ -1,0 +1,76 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Úvod</title>
+  <style>
+    body {
+      margin: 0;
+      background: url('img/back1.jpg') center/cover no-repeat;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    body::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* ztmavení */
+      z-index: 0;
+    }
+
+    .bubble-container {
+      display: flex;
+      gap: 50px;
+      z-index: 1;
+    }
+
+    .bubble {
+      border: 3px solid white;
+      background-color: #EED3A7;
+      border-radius: 70%;
+      width: 230px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      color: black;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .bubble:hover {
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 600px) {
+      .bubble-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .bubble {
+        width: 180px;
+        height: 120px;
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bubble-container">
+    <a class="bubble" href="aboutus.html">O nás</a>
+    <a class="bubble" href="sortiment.html">Sortiment</a>
+  </div>
+</body>
+</html>
