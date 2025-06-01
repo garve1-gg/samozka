@@ -4,8 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        /* Navigace */
+        .navbar {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5); /* tmavé průhledné pozadí */
+            border-radius: 0px 0px 30px 30px;
+            padding: 12px 0;
+            padding-bottom: 16px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav-logo {
+            height: 43px;
+            object-fit: contain;
+            transition: all 0.2s ease;
+        }
+    
+        .nav-logo:hover{
+            transform: scale(1.1);
+        }
+
+
+        @media (max-width: 600px) {
+            .navbar{
+                 height: -30%;
+            }
+
+            .nav-logo{
+                height: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <H1>O nás</H1>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-href">
+        <img src="Wlogo2.png" alt="Logo" class="nav-logo">
+      </a>
+    </div>
+  </nav>
 </body>
 </html>
