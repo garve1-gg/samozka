@@ -19,7 +19,7 @@
       overflow-x: hidden;
     }
 
-    body::before{
+    body::before {
       content: "";
       position: fixed;
       top: 0; left: 0;
@@ -53,7 +53,7 @@
       background: rgba(255, 255, 255, 0.35);
       border: 1px solid rgba(255, 255, 255, 0.4);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px); /* pro Safari */
+      -webkit-backdrop-filter: blur(10px);
       font-family: 'Poppins', sans-serif;
       border-radius: 60px;
       width: 230px;
@@ -76,9 +76,9 @@
       transform: scale(1.1);
     }
 
-    .OfferIcon, .RequirementsIcon, .NewsIcon{
+    .OfferIcon, .RequirementsIcon, .NewsIcon {
       width: 40px;
-      margin-right: 5px;      
+      margin-right: 5px;
     }
 
     .content-box {
@@ -102,6 +102,28 @@
       align-items: center;
       padding: 10px;
       border-bottom: 1px solid #ddd;
+    }
+
+    .category-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .category-buttons button {
+      background-color: #666;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .category-buttons button:hover {
+      background-color: #999;
     }
 
     textarea, input, button {
@@ -129,10 +151,9 @@
       color: black;
     }
 
-    /* Navigace */
     .navbar {
       width: 100%;
-      background: rgba(0, 0, 0, 0.5); /* tmavé průhledné pozadí */
+      background: rgba(0, 0, 0, 0.5);
       border-radius: 0px 0px 30px 30px;
       padding: 12px 0;
       padding-bottom: 16px;
@@ -153,52 +174,51 @@
       object-fit: contain;
       transition: all 0.2s ease;
     }
-    
-    .nav-logo:hover{
+
+    .nav-logo:hover {
       transform: scale(1.1);
     }
 
     @media (max-width: 600px) {
-        .bubble-container {
-            flex-direction: column;
-            text-align: center;
-            gap: 20px;
-            padding-top: 120px;
-        }
+      .bubble-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding-top: 120px;
+      }
 
-        .bubble {
-            width: 180px;
-            height: 120px;
-            font-size: 20px;
-        }
+      .bubble {
+        width: 180px;
+        height: 120px;
+        font-size: 20px;
+      }
 
-        .content-box {
-            width: 90%;
-            padding: 15px;
-            font-weight: normal;
-            font-size: 18px;
-        }
+      .content-box {
+        width: 90%;
+        padding: 15px;
+        font-weight: normal;
+        font-size: 18px;
+      }
 
-        .item {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 5px;
-        }
+      .item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
 
-        textarea, input, button {
-            font-size: 14px;
-            padding: 8px;
-        }
+      textarea, input, button {
+        font-size: 14px;
+        padding: 8px;
+      }
 
-        .navbar{
-          height: -30%;
-        }
+      .navbar {
+        height: auto;
+      }
 
-        .nav-logo{
-          height: 30px;
-        }
+      .nav-logo {
+        height: 30px;
+      }
     }
-
   </style>
 </head>
 <body>
@@ -212,7 +232,7 @@
   </nav>
 
   <div class="bubble-container">
-    <div class="bubble" onclick="showContent('nabidka')">
+    <div class="bubble" onclick="showContent('kategorie')">
       <img src="product.png" alt="Offer" class="OfferIcon">
       Nabídka
     </div>
@@ -221,15 +241,18 @@
       <img src="writing.png" alt="Requirements" class="RequirementsIcon">
       Požadavky
     </div>
+
     <div class="bubble" onclick="showContent('aktuality')">
       <img src="speaker.png" alt="News" class="NewsIcon">
       Aktuality
     </div>
   </div>
 
-  <div id="nabidka" class="content-box">
-    <h2>Položky v obchodě</h2>
-    <div id="items"></div>
+  <!-- Kategorie -->
+  <div id="kategorie" class="content-box">
+    <h2>Kategorie</h2>
+    <div class="category-buttons" id="categoryList"></div>
+    <div id="categoryItems"></div>
   </div>
 
   <div id="pozadavky" class="content-box">
@@ -239,21 +262,19 @@
   </div>
 
   <div id="aktuality" class="content-box">
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fermentum lacus a lectus iaculis, eu pellentesque nunc aliquam. Nulla aliquam eget ipsum id vulputate. Ut scelerisque magna eu tortor hendrerit, et aliquam elit convallis. Maecenas gravida odio nec dolor congue, in ultricies magna elementum. Duis urna augue, consequat id sapien sit amet, mattis mattis est. Aliquam erat volutpat. Aliquam erat nisl, consectetur ut varius ac, rutrum id arcu. Pellentesque eget tristique purus, a facilisis urna. Proin et sapien consequat, vulputate metus id, venenatis turpis. Aenean pretium dolor et rhoncus placerat. Ut ut eleifend nunc. Curabitur ultrices ante libero, id pretium ex ornare ut.
-    </p>
-    <p>    
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam fermentum lacus a lectus iaculis, eu pellentesque nunc aliquam. Nulla aliquam eget ipsum id vulputate. Ut scelerisque magna eu tortor hendrerit, et aliquam elit convallis. Maecenas gravida odio nec dolor congue, in ultricies magna elementum. Duis urna augue, consequat id sapien sit amet, mattis mattis est. Aliquam erat volutpat. Aliquam erat nisl, consectetur ut varius ac, rutrum id arcu. Pellentesque eget tristique purus, a facilisis urna. Proin et sapien consequat, vulputate metus id, venenatis turpis. Aenean pretium dolor et rhoncus placerat. Ut ut eleifend nunc. Curabitur ultrices ante libero, id pretium ex ornare ut.
-    </p>
+    <p>Aktuality budou doplněny.</p>
   </div>
 
   <script>
     function showContent(id) {
       document.querySelectorAll('.content-box').forEach(el => el.style.display = 'none');
       document.getElementById(id).style.display = 'block';
+
+      if (id === 'kategorie') {
+        loadCategories(); // načte kategorie pouze při otevření „Nabídky“
+      } 
     }
 
-    // Firebase konfigurace
     const firebaseConfig = {
       apiKey: "AIzaSyABTLnTKRr2FdzYKBpwf8KpKdYBhzJY1oQ",
       authDomain: "smazka-10a6b.firebaseapp.com",
@@ -267,49 +288,63 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    function loadItems() {
-      db.ref("items").on("value", snapshot => {
-        const itemsDiv = document.getElementById("items");
-        itemsDiv.innerHTML = "";
+    function loadCategories() {
+      const list = document.getElementById("categoryList");
+      list.innerHTML = "";
+      db.ref("categories").once("value").then(snapshot => {
+        snapshot.forEach(catSnap => {
+          const cat = catSnap.key;
+          const btn = document.createElement("button");
+          btn.textContent = cat;
+          btn.onclick = () => showCategoryItems(cat);
+          list.appendChild(btn);
+        });
+      });
+    }
 
+    function showCategoryItems(category) {
+      const container = document.getElementById("categoryItems");
+      container.innerHTML = `<h3>${category}</h3>`;
+      db.ref("items").once("value").then(snapshot => {
         snapshot.forEach(child => {
           const item = child.val();
-          const name = item.name || "Neznámá položka";
-          const cena = item.cena !== undefined ? item.cena + " Kč" : "";
-
-          itemsDiv.innerHTML += `
-            <div class="item">
-              <span>${name}</span>
-              <span><strong>${cena}</strong></span>
-            </div>
-          `;
+          if (item.kategorie === category) {
+            const name = item.name || "Neznámá položka";
+            const cena = item.cena !== undefined ? item.cena + " Kč" : "";
+            container.innerHTML += `
+              <div class="item">
+                <span>${name}</span>
+                <strong>${cena}</strong>
+              </div>`;
+          }
         });
       });
     }
 
     function sendMessage() {
-        const input = document.getElementById("msgInput");
-        const msg = input.value.trim();
+      const input = document.getElementById("msgInput");
+      const msg = input.value.trim();
+      if (!msg) {
+        alert("Zpráva nesmí být prázdná.");
+        return;
+      }
 
-        if (!msg) {
-            alert("Zpráva nesmí být prázdná.");
-            return;
-        }
-
-        // Pokus o zápis do Firebase
-        db.ref("messages").push({ text: msg, solved: false })
-            .then(() => {
-            alert("Zpráva byla úspěšně odeslána.");
-            input.value = "";
+      db.ref("messages").push({ text: msg, solved: false })
+        .then(() => {
+          alert("Zpráva byla úspěšně odeslána.");
+          input.value = "";
         })
         .catch(error => {
-            console.error("Chyba při odesílání zprávy:", error);
-            alert("Zpráva nebyla odeslána. Zkontrolujte připojení k databázi.");
+          console.error("Chyba při odesílání zprávy:", error);
+          alert("Zpráva nebyla odeslána. Zkontrolujte připojení k databázi.");
         });
     }
 
-    // Načtení při startu
-    loadItems();
+    // Inicializace
+    window.onload = () => {
+      loadCategories();
+      showContent('nabidka');
+    };
   </script>
 
 </body>
