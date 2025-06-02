@@ -69,10 +69,16 @@
       color: white;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
       transition: all 0.3s ease;
+      flex-direction: row;
     }
 
     .bubble:hover {
       transform: scale(1.1);
+    }
+
+    .OfferIcon, .RequirementsIcon, .NewsIcon{
+      width: 40px;
+      margin-right: 5px;      
     }
 
     .content-box {
@@ -205,9 +211,19 @@
   </nav>
 
   <div class="bubble-container">
-    <div class="bubble" onclick="showContent('nabidka')">Nabídka</div>
-    <div class="bubble" onclick="showContent('pozadavky')">Požadavky</div>
-    <div class="bubble" onclick="showContent('aktuality')">Aktuality</div>
+    <div class="bubble" onclick="showContent('nabidka')">
+      <img src="product.png" alt="Offer" class="OfferIcon">
+      Nabídka
+    </div>
+
+    <div class="bubble" onclick="showContent('pozadavky')">
+      <img src="writing.png" alt="Requirements" class="RequirementsIcon">
+      Požadavky
+    </div>
+    <div class="bubble" onclick="showContent('aktuality')">
+      <img src="speaker.png" alt="News" class="NewsIcon">
+      Aktuality
+    </div>
   </div>
 
   <div id="nabidka" class="content-box">
