@@ -32,7 +32,7 @@
 
     .bubble {
       background: rgba(255, 255, 255, 0.35);
-      border: 1px solid rgba(255, 255, 255, 0.4);
+      border: 1px solid rgb(255, 255, 255, 0.4);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px); /* pro Safari */
       border-radius: 60px;
@@ -53,15 +53,26 @@
       flex-direction: row;
     }
 
-    .bubble:hover {
+    .bubble:hover{
       background: rgba(255, 255, 255, 0.25);
       transform: scale(1.05);
     }
 
     .AboutUsIcon, .SortimentIcon{
       width: 40px;
-      margin-right: 5px;
+      margin-right: 10px;
     }
+
+    /* Icon change */
+
+    .bubble:hover .AboutUsIcon{
+      content: url('aboutF.png');
+    }
+
+    .bubble:hover .SortimentIcon{
+      content: url('sortimentF.png');
+    }
+
 
     /* Navigace */
     .navbar {
@@ -120,12 +131,12 @@
 
   <div class="bubble-container">
     <a class="bubble" href="aboutus.html">
-      <img src="listW.png" alt="AboutUs" class="AboutUsIcon">
+      <img src="about.png" alt="AboutUs" class="AboutUsIcon">
       O nás
     </a>
 
     <a class="bubble" href="sortiment.html">
-      <img src="shopping-bagW.png" alt="Sortiment" class="SortimentIcon">
+      <img src="sortiment.png" alt="Sortiment" class="SortimentIcon">
       Sortiment
     </a>
   </div>
