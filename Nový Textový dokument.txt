@@ -1,0 +1,21 @@
+    .bubble {
+      border: 3px solid white;
+      background-color: #EED3A7;
+      border-radius: 70%;
+      width: 230px;
+      height: 150px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      color: black;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
+    }
+
+    .bubble:hover {
+      transform: scale(1.1);
+    }
