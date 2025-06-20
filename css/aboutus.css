@@ -130,14 +130,19 @@ h1, h2, h3 {
   display: flex;
   overflow-x: auto;
   gap: 1rem;
-  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
 .gallery img {
   max-height: 300px;
   border-radius: 10px;
+  flex-shrink: 0;
   scroll-snap-align: start;
   cursor: pointer;
+}
+
+.gallery-spacer {
+  flex: 0 ;
 }
 
 /** VIZUALIZACE **/
@@ -481,4 +486,20 @@ footer {
     background: none;
     padding: 0;
   }
+}
+
+
+/*DOCASNE*/
+.how-img{
+  width: 30px;
+}
+
+@media (max-width: 768px) {
+  .gal{
+    width: 60%;
+    max-width:400px;
+  }
+  /*.gallery > :first-child {
+    margin-left: 15px;
+  }*/
 }
